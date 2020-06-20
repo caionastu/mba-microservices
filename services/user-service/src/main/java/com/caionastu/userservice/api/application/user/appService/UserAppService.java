@@ -4,10 +4,15 @@ import com.caionastu.userservice.api.application.user.dto.UserAssemblerDTO;
 import com.caionastu.userservice.api.application.user.dto.UserDTO;
 import com.caionastu.userservice.api.domain.user.service.UserService;
 import com.caionastu.userservice.api.domain.user.vo.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 @Component
+@Slf4j
 public class UserAppService {
 
     private final UserAssemblerDTO assembler;
@@ -18,10 +23,30 @@ public class UserAppService {
         this.service = service;
     }
 
-    public Mono<UserDTO> create(UserDTO userDTO) {
-        User user = assembler.toEntity(userDTO);
-        return service.create(user)
+    public Flux<UserDTO> findAll() {
+        return service.findAll()
                 .map(assembler::toDTO);
-
     }
+
+    public Mono<UserDTO> create(UserDTO userDTO) {
+        if (Objects.isNull(userDTO)) {
+            return Mono.empty();
+        }
+
+        return service.create(assembler.toEntity(userDTO))
+                .flatMap(user -> Mono.just(assembler.toDTO(user)))
+                .doOnError(error -> log.error(error.getMessage()));
+    }
+
+    public Mono<UserDTO> update(String id, UserDTO userDTO) {
+        userDTO.setId(id);
+        return service.update(assembler.toEntity(userDTO))
+                .flatMap(user -> Mono.just(assembler.toDTO(user)))
+                .doOnError(error -> log.error(error.getMessage()));
+    }
+
+    public Mono<Void> delete(String id) {
+        return service.delete(id);
+    }
+
 }

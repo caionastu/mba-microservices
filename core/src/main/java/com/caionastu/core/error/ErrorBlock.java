@@ -2,24 +2,24 @@ package com.caionastu.core.error;
 
 
 import com.google.common.collect.Sets;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.http.HttpStatus;
 
 import java.util.Collections;
 import java.util.Set;
 
 @Builder
-@Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ErrorBlock {
 
     @Getter
+    @Setter
     private HttpStatus code;
 
     @Getter
+    @Setter
     private String header;
 
     @Builder.Default

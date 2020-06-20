@@ -5,13 +5,13 @@ import com.caionastu.core.error.ErrorBlock;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class BusinessException extends AbstractException {
+public class RecordNotFoundException extends AbstractException {
 
-    public BusinessException(ErrorBlock errorBlock) {
+    public RecordNotFoundException(ErrorBlock errorBlock) {
         super(errorBlock);
     }
 
-    public BusinessException(String message) {
+    public RecordNotFoundException(String message) {
         super(message);
     }
 }

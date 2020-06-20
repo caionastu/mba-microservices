@@ -16,6 +16,6 @@ public class MongoConfiguration extends AbstractReactiveMongoConfiguration {
 
     @Override
     protected String getDatabaseName() {
-        return "reactive-example";
+        return "microservices";
     }
 }

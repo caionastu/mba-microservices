@@ -17,6 +17,7 @@ public class User {
     private String lastName;
     private String age;
     private String email;
+    private String username;
     private String password;
     private String address;
     private UserType userType;

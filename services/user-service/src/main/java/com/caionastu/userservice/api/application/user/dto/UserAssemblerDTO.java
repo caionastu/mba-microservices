@@ -2,6 +2,7 @@ package com.caionastu.userservice.api.application.user.dto;
 
 import com.caionastu.core.interfaces.IAssemblerDTO;
 import com.caionastu.userservice.api.domain.user.vo.User;
+import com.caionastu.userservice.api.domain.user.vo.UserType;
 
 public class UserAssemblerDTO implements IAssemblerDTO<UserDTO, User> {
 
@@ -13,7 +14,8 @@ public class UserAssemblerDTO implements IAssemblerDTO<UserDTO, User> {
                 .lastName(user.getLastName())
                 .age(user.getAge())
                 .email(user.getEmail())
-                .userType(user.getUserType())
+                .username(user.getUsername())
+                .userType(user.getUserType().getType())
                 .build();
     }
 
@@ -25,7 +27,8 @@ public class UserAssemblerDTO implements IAssemblerDTO<UserDTO, User> {
                 .lastName(userDTO.getLastName())
                 .age(userDTO.getAge())
                 .email(userDTO.getEmail())
-                .userType(userDTO.getUserType())
+                .username(userDTO.getUsername())
+                .userType(UserType.of(userDTO.getUserType()))
                 .password(userDTO.getPassword())
                 .build();
     }
