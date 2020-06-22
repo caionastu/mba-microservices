@@ -14,9 +14,3 @@ spring:
           uri: http://user-service/
           predicates:
             - Path=/users/**
-        - id: login-service
-          uri: http://login-service/
-          predicates:
-            - Path=/login/**
-
-
