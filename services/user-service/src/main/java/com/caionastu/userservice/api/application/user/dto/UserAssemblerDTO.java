@@ -16,6 +16,7 @@ public class UserAssemblerDTO implements IAssemblerDTO<UserDTO, User> {
                 .email(user.getEmail())
                 .username(user.getUsername())
                 .userType(user.getUserType().getType())
+                .address(user.getAddress())
                 .build();
     }
 
@@ -30,6 +31,7 @@ public class UserAssemblerDTO implements IAssemblerDTO<UserDTO, User> {
                 .username(userDTO.getUsername())
                 .userType(UserType.of(userDTO.getUserType()))
                 .password(userDTO.getPassword())
+                .address(userDTO.getAddress())
                 .build();
     }
 }

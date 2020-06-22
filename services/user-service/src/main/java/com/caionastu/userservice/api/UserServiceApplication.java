@@ -16,18 +16,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class UserServiceApplication {
 
     @Bean
-    @LoadBalanced
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
-    @Bean
-    @LoadBalanced
-    public WebClient.Builder webClientBuilder() {
-        return WebClient.builder();
-    }
-
-    @Bean
     public ExceptionAdvices exceptionAdvices() {
         return new ExceptionAdvices();
     }

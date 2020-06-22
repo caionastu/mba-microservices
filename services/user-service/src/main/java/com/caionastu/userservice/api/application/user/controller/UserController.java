@@ -36,8 +36,9 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
-    public void findById(@PathVariable String id) {
+    public Mono<UserDTO> findById(@PathVariable String id) {
         log.info("Find Users by ID: {} ", id);
+        return appService.findById(id);
     }
 
     @PostMapping

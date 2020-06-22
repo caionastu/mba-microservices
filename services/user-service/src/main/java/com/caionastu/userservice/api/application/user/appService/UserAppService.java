@@ -28,6 +28,11 @@ public class UserAppService {
                 .map(assembler::toDTO);
     }
 
+    public Mono<UserDTO> findById(String id) {
+        return service.findById(id)
+                .map(assembler::toDTO);
+    }
+
     public Mono<UserDTO> create(UserDTO userDTO) {
         if (Objects.isNull(userDTO)) {
             return Mono.empty();
