@@ -3,9 +3,7 @@ package com.caionastu.core.excpetions;
 
 import com.caionastu.core.error.ErrorBlock;
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public abstract class AbstractException extends RuntimeException {
 
     @Getter

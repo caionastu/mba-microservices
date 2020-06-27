@@ -8,6 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ErrorMessage {
-    private String domain;
     private String message;
 }

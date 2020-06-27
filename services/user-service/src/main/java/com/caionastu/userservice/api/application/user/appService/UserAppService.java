@@ -2,8 +2,8 @@ package com.caionastu.userservice.api.application.user.appService;
 
 import com.caionastu.userservice.api.application.user.dto.UserAssemblerDTO;
 import com.caionastu.userservice.api.application.user.dto.UserDTO;
+import com.caionastu.userservice.api.application.user.dto.UserRequestDTO;
 import com.caionastu.userservice.api.domain.user.service.UserService;
-import com.caionastu.userservice.api.domain.user.vo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -25,12 +25,17 @@ public class UserAppService {
 
     public Flux<UserDTO> findAll() {
         return service.findAll()
-                .map(assembler::toDTO);
+                .flatMap(user -> Mono.just(assembler.toDTO(user)));
     }
 
     public Mono<UserDTO> findById(String id) {
         return service.findById(id)
-                .map(assembler::toDTO);
+                .flatMap(user -> Mono.just(assembler.toDTO(user)));
+    }
+
+    public Flux<UserDTO> findByFilter(UserRequestDTO requestDTO) {
+        return service.findByFilter(requestDTO)
+                .flatMap(user -> Mono.just(assembler.toDTO(user)));
     }
 
     public Mono<UserDTO> create(UserDTO userDTO) {

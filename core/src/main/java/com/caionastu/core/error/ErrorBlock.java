@@ -1,6 +1,5 @@
 package com.caionastu.core.error;
 
-
 import com.google.common.collect.Sets;
 import lombok.*;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,7 @@ public class ErrorBlock {
     private String header;
 
     @Builder.Default
-    private Set<ErrorMessage> errorMessages = Sets.newHashSet();
+    private final Set<ErrorMessage> errorMessages = Sets.newHashSet();
 
     public Set<ErrorMessage> getErrorMessages() {
         return Collections.unmodifiableSet(errorMessages);

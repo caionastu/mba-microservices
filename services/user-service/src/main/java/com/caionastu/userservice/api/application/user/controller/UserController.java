@@ -3,12 +3,13 @@ package com.caionastu.userservice.api.application.user.controller;
 import com.caionastu.userservice.api.application.user.appService.UserAppService;
 import com.caionastu.userservice.api.application.user.dto.UserDTO;
 import com.caionastu.userservice.api.application.user.dto.UserRequestDTO;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(path = "users")
@@ -21,18 +22,19 @@ public class UserController {
         this.appService = appService;
     }
 
+//    @GetMapping
+//    public Flux<UserDTO> findAll() {
+//        log.info("Find All Users");
+//        return appService.findAll();
+//    }
+
     @GetMapping
-    public Flux<UserDTO> findAll() {
-        log.info("Find All Users");
-        return appService.findAll();
-    }
-
-    @GetMapping(path = "/filter")
     public Flux<UserDTO> findByFilter(@RequestBody UserRequestDTO requestDTO) {
-        log.info("Find Users by Filter. RequestDTO: {}", requestDTO);
 
-        // TODO: Implement FindByFilter
-        return Flux.just(new UserDTO());
+        // TODO: Use Specification
+
+        log.info("Find Users by Filter. RequestDTO: {}", requestDTO);
+        return appService.findByFilter(requestDTO);
     }
 
     @GetMapping(path = "/{id}")
@@ -42,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping
-    public Mono<ResponseEntity<UserDTO>> create(@RequestBody UserDTO userDTO) {
+    public Mono<ResponseEntity<UserDTO>> create(@RequestBody @Valid UserDTO userDTO) {
         log.info("Create User. UserDto: {}", userDTO);
         return appService.create(userDTO)
                 .flatMap(userCreated -> Mono.just(ResponseEntity.ok().body(userCreated)));

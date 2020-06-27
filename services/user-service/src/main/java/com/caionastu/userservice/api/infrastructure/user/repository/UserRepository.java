@@ -1,7 +1,9 @@
 package com.caionastu.userservice.api.infrastructure.user.repository;
 
+import com.caionastu.userservice.api.application.user.dto.UserRequestDTO;
 import com.caionastu.userservice.api.domain.user.repository.IUserRepository;
 import com.caionastu.userservice.api.domain.user.vo.User;
+import com.caionastu.userservice.api.domain.user.vo.UserType;
 import com.google.common.base.Strings;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -57,5 +59,23 @@ public class UserRepository implements IUserRepository {
 
     public Flux<User> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Flux<User> findByFilter(UserRequestDTO requestDTO) {
+        boolean hasName = !Strings.isNullOrEmpty(requestDTO.getName());
+        boolean hasUserType = !Strings.isNullOrEmpty(requestDTO.getUserType());
+
+        Query query = new Query();
+
+        if (hasName) {
+            query.addCriteria(where("name").is(requestDTO.getName()));
+        }
+
+        if (hasUserType) {
+            query.addCriteria(where("userType").is(requestDTO.getUserType()));
+        }
+
+        return mongoTemplate.find(query, User.class);
     }
 }

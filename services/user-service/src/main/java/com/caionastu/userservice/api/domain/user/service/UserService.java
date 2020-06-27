@@ -3,6 +3,7 @@ package com.caionastu.userservice.api.domain.user.service;
 import com.caionastu.core.error.CommonErrorKeys;
 import com.caionastu.core.excpetions.BusinessException;
 import com.caionastu.core.excpetions.RecordNotFoundException;
+import com.caionastu.userservice.api.application.user.dto.UserRequestDTO;
 import com.caionastu.userservice.api.domain.user.validator.IUserPersistValidator;
 import com.caionastu.userservice.api.domain.user.vo.User;
 import com.caionastu.userservice.api.infrastructure.user.repository.UserRepository;
@@ -30,6 +31,11 @@ public class UserService {
     public Flux<User> findAll() {
         return repository.findAll();
     }
+
+    public Flux<User> findByFilter(UserRequestDTO requestDTO) {
+        return repository.findByFilter(requestDTO);
+    }
+
 
     public Mono<User> create(User user) {
         return persistValidators.flatMap(validator -> validator.validate(user))
