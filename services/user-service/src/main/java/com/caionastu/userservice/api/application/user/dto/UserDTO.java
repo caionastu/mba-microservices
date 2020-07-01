@@ -37,7 +37,7 @@ public class UserDTO {
 
     @Pattern(
             regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
-            message = "Password is invalid.")
+            message = "Password must have at least 8 characters, one number, one special characters and both uppercase and lowercase letters.")
     private String password;
 
     @NotBlank(message = "Address must not be blank.")

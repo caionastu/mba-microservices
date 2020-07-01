@@ -28,14 +28,9 @@ public class UserService {
         return repository.findById(id);
     }
 
-    public Flux<User> findAll() {
-        return repository.findAll();
-    }
-
     public Flux<User> findByFilter(UserRequestDTO requestDTO) {
         return repository.findByFilter(requestDTO);
     }
-
 
     public Mono<User> create(User user) {
         return persistValidators.flatMap(validator -> validator.validate(user))
@@ -84,7 +79,7 @@ public class UserService {
                             .userType(user.getUserType())
                             .build();
 
-                    return repository.update(user);
+                    return repository.update(oldUser);
                 });
     }
 

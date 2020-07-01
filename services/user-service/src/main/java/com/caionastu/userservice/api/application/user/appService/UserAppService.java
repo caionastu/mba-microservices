@@ -23,11 +23,6 @@ public class UserAppService {
         this.service = service;
     }
 
-    public Flux<UserDTO> findAll() {
-        return service.findAll()
-                .flatMap(user -> Mono.just(assembler.toDTO(user)));
-    }
-
     public Mono<UserDTO> findById(String id) {
         return service.findById(id)
                 .flatMap(user -> Mono.just(assembler.toDTO(user)));

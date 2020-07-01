@@ -3,9 +3,10 @@ package com.caionastu.userservice.api.infrastructure.user.repository;
 import com.caionastu.userservice.api.application.user.dto.UserRequestDTO;
 import com.caionastu.userservice.api.domain.user.repository.IUserRepository;
 import com.caionastu.userservice.api.domain.user.vo.User;
-import com.caionastu.userservice.api.domain.user.vo.UserType;
 import com.google.common.base.Strings;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
@@ -57,10 +58,6 @@ public class UserRepository implements IUserRepository {
         return mongoTemplate.exists(query, User.class);
     }
 
-    public Flux<User> findAll() {
-        return repository.findAll();
-    }
-
     @Override
     public Flux<User> findByFilter(UserRequestDTO requestDTO) {
         boolean hasName = !Strings.isNullOrEmpty(requestDTO.getName());
@@ -76,6 +73,8 @@ public class UserRepository implements IUserRepository {
             query.addCriteria(where("userType").is(requestDTO.getUserType()));
         }
 
+        query.with(PageRequest.of(requestDTO.getPage(), requestDTO.getSize()));
+        query.with(Sort.by(Sort.Direction.ASC, "username"));
         return mongoTemplate.find(query, User.class);
     }
 }

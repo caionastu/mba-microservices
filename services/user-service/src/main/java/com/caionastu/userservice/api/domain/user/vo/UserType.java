@@ -3,8 +3,8 @@ package com.caionastu.userservice.api.domain.user.vo;
 import lombok.Getter;
 
 public enum UserType {
-    CLIENT("Client"),
-    PERSONAL_ORGANIZER("Personal Organizer"),
+    CLIENT("CLIENT"),
+    PERSONAL_ORGANIZER("PERSONAL ORGANIZER"),
     ;
 
     @Getter

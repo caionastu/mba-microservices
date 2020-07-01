@@ -3,6 +3,7 @@ package com.caionastu.userservice.api.application.user.controller;
 import com.caionastu.userservice.api.application.user.appService.UserAppService;
 import com.caionastu.userservice.api.application.user.dto.UserDTO;
 import com.caionastu.userservice.api.application.user.dto.UserRequestDTO;
+import com.mongodb.lang.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,17 +23,8 @@ public class UserController {
         this.appService = appService;
     }
 
-//    @GetMapping
-//    public Flux<UserDTO> findAll() {
-//        log.info("Find All Users");
-//        return appService.findAll();
-//    }
-
     @GetMapping
-    public Flux<UserDTO> findByFilter(@RequestBody UserRequestDTO requestDTO) {
-
-        // TODO: Use Specification
-
+    public Flux<UserDTO> findByFilter(@Nullable @RequestBody UserRequestDTO requestDTO) {
         log.info("Find Users by Filter. RequestDTO: {}", requestDTO);
         return appService.findByFilter(requestDTO);
     }
