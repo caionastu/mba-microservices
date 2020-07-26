@@ -1,5 +1,6 @@
 package com.caionastu.userservice.api.application.user.dto;
 
+import com.caionastu.userservice.api.application.address.dto.AddressDTO;
 import lombok.*;
 
 import javax.validation.constraints.*;
@@ -40,8 +41,8 @@ public class UserDTO {
             message = "Password must have at least 8 characters, one number, one special characters and both uppercase and lowercase letters.")
     private String password;
 
-    @NotBlank(message = "Address must not be blank.")
-    private String address;
+    @NotNull(message = "Address must not be null.")
+    private AddressDTO address;
 
     @NotBlank(message = "UserType must not be blank.")
     private String userType;

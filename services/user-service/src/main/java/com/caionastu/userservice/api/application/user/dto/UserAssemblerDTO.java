@@ -1,10 +1,19 @@
 package com.caionastu.userservice.api.application.user.dto;
 
 import com.caionastu.core.interfaces.IAssemblerDTO;
+import com.caionastu.userservice.api.application.address.dto.AddressAssemblerDTO;
 import com.caionastu.userservice.api.domain.user.vo.User;
 import com.caionastu.userservice.api.domain.user.vo.UserType;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserAssemblerDTO implements IAssemblerDTO<UserDTO, User> {
+
+    private final AddressAssemblerDTO addressAssemblerDTO;
+
+    public UserAssemblerDTO(AddressAssemblerDTO addressAssemblerDTO) {
+        this.addressAssemblerDTO = addressAssemblerDTO;
+    }
 
     @Override
     public UserDTO toDTO(User user) {
@@ -16,7 +25,7 @@ public class UserAssemblerDTO implements IAssemblerDTO<UserDTO, User> {
                 .email(user.getEmail())
                 .username(user.getUsername())
                 .userType(user.getUserType().getType())
-                .address(user.getAddress())
+                .address(addressAssemblerDTO.toDTO(user.getAddress()))
                 .build();
     }
 
@@ -31,7 +40,7 @@ public class UserAssemblerDTO implements IAssemblerDTO<UserDTO, User> {
                 .username(userDTO.getUsername())
                 .userType(UserType.of(userDTO.getUserType()))
                 .password(userDTO.getPassword())
-                .address(userDTO.getAddress())
+                .address(addressAssemblerDTO.toEntity(userDTO.getAddress()))
                 .build();
     }
 }

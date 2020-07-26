@@ -1,8 +1,8 @@
 package com.caionastu.userservice.api.domain.user.service;
 
-import com.caionastu.core.error.CommonErrorKeys;
 import com.caionastu.core.excpetions.BusinessException;
 import com.caionastu.core.excpetions.RecordNotFoundException;
+import com.caionastu.userservice.api.application.error.ErrorKeys;
 import com.caionastu.userservice.api.application.user.dto.UserRequestDTO;
 import com.caionastu.userservice.api.domain.user.validator.IUserPersistValidator;
 import com.caionastu.userservice.api.domain.user.vo.User;
@@ -41,7 +41,7 @@ public class UserService {
                 .flatMap(errorBlock -> {
                     if (errorBlock.hasErrors()) {
                         errorBlock.setCode(HttpStatus.BAD_REQUEST);
-                        errorBlock.setHeader(CommonErrorKeys.FAIL_TO_CREATE_ENTITY);
+                        errorBlock.setHeader(ErrorKeys.Common.FAIL_TO_CREATE_ENTITY);
                         return Mono.error(new BusinessException(errorBlock));
                     }
 
@@ -59,13 +59,13 @@ public class UserService {
                 .flatMap(errorBlock -> {
                     if (errorBlock.hasErrors()) {
                         errorBlock.setCode(HttpStatus.BAD_REQUEST);
-                        errorBlock.setHeader(CommonErrorKeys.FAIL_TO_UPDATE_ENTITY);
+                        errorBlock.setHeader(ErrorKeys.Common.FAIL_TO_UPDATE_ENTITY);
                         return Mono.error(new BusinessException(errorBlock));
                     }
 
                     return findById(user.getId());
                 })
-                .switchIfEmpty(Mono.error(new RecordNotFoundException(CommonErrorKeys.ENTITY_NOT_FOUND)))
+                .switchIfEmpty(Mono.error(new RecordNotFoundException(ErrorKeys.Common.ENTITY_NOT_FOUND)))
                 .flatMap(oldUser -> {
                     oldUser = User.builder()
                             .id(oldUser.getId())

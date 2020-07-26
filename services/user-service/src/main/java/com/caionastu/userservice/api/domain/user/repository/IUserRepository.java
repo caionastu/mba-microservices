@@ -11,4 +11,5 @@ public interface IUserRepository extends ICrudRepository<User> {
     Mono<Boolean> existByUsernameWithDifferentId(String username, String id);
 
     Flux<User> findByFilter(UserRequestDTO userRequestDTO);
+
 }

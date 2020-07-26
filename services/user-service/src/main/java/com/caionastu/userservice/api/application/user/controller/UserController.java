@@ -3,8 +3,8 @@ package com.caionastu.userservice.api.application.user.controller;
 import com.caionastu.userservice.api.application.user.appService.UserAppService;
 import com.caionastu.userservice.api.application.user.dto.UserDTO;
 import com.caionastu.userservice.api.application.user.dto.UserRequestDTO;
-import com.mongodb.lang.Nullable;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping
-    public Flux<UserDTO> findByFilter(@Nullable @RequestBody UserRequestDTO requestDTO) {
+    public Flux<UserDTO> findByFilter(@RequestBody UserRequestDTO requestDTO) {
         log.info("Find Users by Filter. RequestDTO: {}", requestDTO);
         return appService.findByFilter(requestDTO);
     }
@@ -39,7 +39,7 @@ public class UserController {
     public Mono<ResponseEntity<UserDTO>> create(@RequestBody @Valid UserDTO userDTO) {
         log.info("Create User. UserDto: {}", userDTO);
         return appService.create(userDTO)
-                .flatMap(userCreated -> Mono.just(ResponseEntity.ok().body(userCreated)));
+                .flatMap(userCreated -> Mono.just(ResponseEntity.status(HttpStatus.CREATED).body(userCreated)));
     }
 
     @PutMapping(path = "/{id}")
@@ -50,8 +50,9 @@ public class UserController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public Mono<Void> delete(@PathVariable String id) {
+    public Mono<ResponseEntity<Void>> delete(@PathVariable String id) {
         log.info("Delete User. Id: {}", id);
-        return appService.delete(id);
+        return appService.delete(id)
+                .flatMap(aVoid -> Mono.just(ResponseEntity.ok().body(aVoid)));
     }
 }

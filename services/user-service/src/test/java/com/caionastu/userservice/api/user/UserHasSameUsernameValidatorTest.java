@@ -1,6 +1,7 @@
 package com.caionastu.userservice.api.user;
 
 import com.caionastu.core.error.ErrorBlock;
+import com.caionastu.userservice.api.application.error.ErrorKeys;
 import com.caionastu.userservice.api.domain.user.validator.UserHasSameUsernameValidator;
 import com.caionastu.userservice.api.domain.user.vo.User;
 import com.caionastu.userservice.api.infrastructure.user.repository.UserRepository;

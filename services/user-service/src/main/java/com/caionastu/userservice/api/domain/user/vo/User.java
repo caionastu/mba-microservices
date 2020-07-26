@@ -1,5 +1,6 @@
 package com.caionastu.userservice.api.domain.user.vo;
 
+import com.caionastu.userservice.api.domain.address.Address;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Builder
 @Getter
-@Setter
 @ToString
 @Document(collection = "user")
 public class User {
@@ -19,6 +19,6 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private String address;
+    private Address address;
     private UserType userType;
 }

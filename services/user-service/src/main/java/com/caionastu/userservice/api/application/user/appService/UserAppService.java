@@ -18,8 +18,8 @@ public class UserAppService {
     private final UserAssemblerDTO assembler;
     private final UserService service;
 
-    public UserAppService(UserService service) {
-        this.assembler = new UserAssemblerDTO();
+    public UserAppService(UserService service, UserAssemblerDTO assembler) {
+        this.assembler = assembler;
         this.service = service;
     }
 
