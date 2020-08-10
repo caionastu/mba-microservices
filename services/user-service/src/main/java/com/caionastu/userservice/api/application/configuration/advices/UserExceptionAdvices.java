@@ -4,7 +4,6 @@ import com.caionastu.core.advices.AdviceHandler;
 import com.caionastu.core.advices.ExceptionAdvices;
 import com.caionastu.core.error.ErrorBlock;
 import com.caionastu.userservice.api.application.error.ErrorKeys;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
