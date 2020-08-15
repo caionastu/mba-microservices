@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping(path = "/{id}")
-    public Mono<ResponseEntity<UserDTO>> update(@PathVariable String id, @RequestBody UserDTO userDTO) {
+    public Mono<ResponseEntity<UserDTO>> update(@PathVariable String id, @RequestBody @Valid UserDTO userDTO) {
         log.info("Update User. UserDto: {}", userDTO);
         return appService.update(id, userDTO)
                 .flatMap(userUpdated -> Mono.just(ResponseEntity.ok().body(userUpdated)));

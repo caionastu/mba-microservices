@@ -33,6 +33,8 @@ public class UserService {
     }
 
     public Mono<User> create(User user) {
+        // TODO Tratar registros que vierem com ID, caso já exista no banco
+
         return persistValidators.flatMap(validator -> validator.validate(user))
                 .reduce((blockTotalize, currentBlock) -> {
                     blockTotalize.addErrorMessages(currentBlock.getErrorMessages());
