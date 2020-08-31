@@ -18,3 +18,7 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/users/**
+        - id: image-service
+          uri: lb://image-service
+          predicates:
+            - Path=/images/**
