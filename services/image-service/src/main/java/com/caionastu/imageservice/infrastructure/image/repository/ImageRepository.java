@@ -58,5 +58,4 @@ public class ImageRepository implements IImageRepository {
 
         return mongoTemplate.find(query, Image.class);
     }
-
 }

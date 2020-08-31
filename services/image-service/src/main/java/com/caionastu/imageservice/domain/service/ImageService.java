@@ -7,6 +7,7 @@ import com.caionastu.imageservice.application.ErrorKeys;
 import com.caionastu.imageservice.application.image.dto.ImageRequestDTO;
 import com.caionastu.imageservice.domain.vo.Image;
 import com.caionastu.imageservice.infrastructure.image.repository.ImageRepository;
+import com.google.common.base.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -16,7 +17,6 @@ import reactor.core.publisher.Mono;
 public class ImageService {
 
     private final ImageRepository repository;
-
 
     public ImageService(ImageRepository repository) {
         this.repository = repository;
@@ -31,6 +31,10 @@ public class ImageService {
     }
 
     public Mono<Image> create(Image image) {
+        if (Strings.isNullOrEmpty(image.getId())) {
+            return repository.create(image);
+        }
+
         return repository.findById(image.getId())
                 .switchIfEmpty(repository.create(image))
                 .flatMap(imageFound -> {
@@ -57,7 +61,6 @@ public class ImageService {
 
                     return repository.update(oldImage);
                 });
-
     }
 
     public Mono<Void> delete(String id) {

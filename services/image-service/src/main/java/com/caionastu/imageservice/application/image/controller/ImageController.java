@@ -15,7 +15,6 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(path = "images")
-@Slf4j
 public class ImageController {
 
     private final ImageAppService appService;
