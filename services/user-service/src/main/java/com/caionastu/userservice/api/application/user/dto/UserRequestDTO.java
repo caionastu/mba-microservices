@@ -2,15 +2,12 @@ package com.caionastu.userservice.api.application.user.dto;
 
 import com.caionastu.core.request.AbstractRequestDTO;
 import com.caionastu.userservice.api.application.coordinate.dto.LocationRequestDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Setter
 @ToString
+@AllArgsConstructor
 public class UserRequestDTO extends AbstractRequestDTO {
 
     private String name;

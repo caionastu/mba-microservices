@@ -23,7 +23,7 @@ public class UserDTO {
 
     @Min(value = 16, message = "Age must be higher than {value}.")
     @Max(value = 130, message = "Age must be lower than {value}.")
-    private String age;
+    private int age;
 
     @Email(message = "Email is invalid.")
     private String email;

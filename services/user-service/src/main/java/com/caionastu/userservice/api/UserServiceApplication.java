@@ -8,10 +8,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
 
-@SpringBootApplication
-@EnableEurekaClient
 @Slf4j
+@EnableSwagger2
+@EnableEurekaClient
+@SpringBootApplication
 public class UserServiceApplication implements WebFluxConfigurer {
 
     @Bean
