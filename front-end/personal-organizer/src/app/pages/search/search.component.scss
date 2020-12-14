@@ -2,14 +2,13 @@
   h2 {
     font-size: 2rem;
   }
-
 }
 
 .placeholder {
   text-align: center;
   background-color: lightgray;
   width: 100%;
-  height: 200px;
+  height: 400px;
 }
 
 .perfil {
@@ -25,4 +24,10 @@
   p {
     font-size: 1.2rem;
   }
+
+  transition: all .2s ease-in-out;
+}
+
+.perfil:hover {
+  transform: scale(1.025);
 }

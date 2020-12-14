@@ -1,0 +1,66 @@
+<po-page-default>
+  <section class="perfil">
+    <po-container p-no-border="true" p-no-padding="true">
+
+      <po-widget *ngIf="profile?.image" class="po-offset-lg-4 po-offset-xl-4 po-lg-2 po-mr-2 po-mt-1" p-height="250" [p-background]="profile?.image">
+      </po-widget>
+
+      <po-widget *ngIf="!profile?.image" class="po-offset-lg-4 po-offset-xl-4 po-lg-2 po-mr-2 po-mt-1" p-height="250">
+        <div class="placeholder po-mb-3">
+          IMAGE PLACEHOLDER
+        </div>
+      </po-widget>
+
+      <po-container class="po-sm-3 po-md-6 po-lg-4 po-mt-1" p-height="250" p-no-border="true" p-no-padding="true">
+        <div class="po-mb-2">
+          <po-info p-label="Nome" [p-value]="user?.name" p-orientation="horizontal"></po-info>
+        </div>
+
+        <div class="po-mb-2">
+          <po-info p-label="Idade" [p-value]="user?.age" p-orientation="horizontal"></po-info>
+        </div>
+
+        <div class="po-mb-2">
+          <po-info p-label="Distância de você" p-value="10km (Em Construção)" p-orientation="horizontal"></po-info>
+        </div>
+
+        <div class="po-mb-2">
+          <po-info p-label="Ranking" p-value="3.5 (Em Construção)" p-orientation="horizontal"></po-info>
+        </div>
+
+        <div class="po-mb-2">
+          <po-info p-label="Serviços Realizados" p-value="20 (Em Construção)" p-orientation="horizontal"></po-info>
+        </div>
+
+        <po-button p-label="Agenda" class="po-sm-4 po-pl-0" (p-click)="constructionPage()"></po-button>
+
+      </po-container>
+    </po-container>
+
+    <po-container class="po-offset-lg-4 po-offset-xl-4 po-lg-2 po-mr-2" p-no-border="true" p-no-padding="true">
+      <div class="po-text-center po-mt-2 po-mb-2">
+        <po-button class="po-sm-6" p-label="Ranking" (p-click)="constructionPage()"></po-button>
+        <po-button class="po-sm-6" p-label="Comentários" (p-click)="constructionPage()"></po-button>
+      </div>
+
+    </po-container>
+  </section>
+
+
+  <section class="portfolio">
+    <h2>Portfolio</h2>
+    <hr>
+
+    <div *ngIf="images.length > 0" class="po-mt-3">
+      <po-widget *ngFor="let image of images" class="po-lg-4 po-mb-2" p-height="500" [p-background]="image.image">
+      </po-widget>
+    </div>
+
+    <div *ngIf="images.length <= 0" class="po-mt-5 po-sm-12 po-text-center">
+      Sem imagens.
+    </div>
+
+  </section>
+
+
+</po-page-default>

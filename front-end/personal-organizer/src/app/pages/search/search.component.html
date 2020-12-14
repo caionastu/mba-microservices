@@ -1,32 +1,36 @@
-<po-page-default >
-    <po-container p-no-shadow="true" p-no-border="true" p-no-padding="true">
-        <po-input class="po-sm-6" p-placeholder="Localização"></po-input>
-        <po-datepicker class="po-sm-2" p-placeholder="Data da consulta"></po-datepicker>
-        <po-select class="po-sm-2" p-placeholder="Distância"></po-select>
-        <po-button class="po-sm-2 po-mt-1" p-label="Procurar" p-type="primary"></po-button>
-    </po-container>
-    
-    
-    <po-container p-no-padding="true" p-no-border="true" p-no-shadow="true">
-        <div class="po-ml-1 po-mt-4 po-mb-3 destaques">
-            <h2>Destaques perto de Você</h2>
-            <hr>    
-        </div>
-    </po-container>
-    
-    <po-container p-no-shadow="true" p-no-padding="true" p-no-border="true">
-        <po-widget *ngFor="let professional of professionals"
-            class="po-sm-12 po-md-12 po-lg-4 po-xl-3 po-mb-4 po-mt-1 perfil"
-            p-primary-label="Ranking"
-            p-secondary-label="Comentários">
-    
-            <div class="placeholder po-mb-3">
-                IMAGE PLACEHOLDER
-            </div>
-            <h1 class="po-mb-3">{{professional.name}}</h1>
-            <h2 class="po-mb-3">{{professional.address.street}} + Distância</h2>
-            <p class="po-mb-2">Descrição: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-        </po-widget>
-        
-    </po-container>
+<po-page-default>
+  <po-container p-no-shadow="true" p-no-border="true" p-no-padding="true">
+    <po-input [(ngModel)]="location" class="po-sm-6" p-placeholder="Localização"></po-input>
+    <po-datepicker class="po-sm-2" p-placeholder="Data da consulta"></po-datepicker>
+    <po-select [(ngModel)]="radius" class="po-sm-2" [p-options]="radiusOptions" p-placeholder="Distância"></po-select>
+    <po-button class="po-sm-2 po-mt-1" p-label="Procurar" p-type="primary" (p-click)="search()"></po-button>
+  </po-container>
+
+  <po-container p-no-padding="true" p-no-border="true" p-no-shadow="true">
+    <div class="po-ml-1 po-mt-4 po-mb-3 destaques">
+      <h2>Destaques perto de Você</h2>
+      <hr>
+    </div>
+  </po-container>
+
+  <po-widget *ngFor="let userView of userViews" class="po-sm-12 po-md-12 po-lg-4 po-xl-4 po-mb-4 po-mt-1 perfil"
+    p-primary-label="Ranking" p-secondary-label="Comentários" (p-click)="goToPerfil(userView.user.id)">
+
+    <div *ngIf="!userView.images[0]" class="placeholder po-mb-3">
+      IMAGE PLACEHOLDER
+    </div>
+
+    <img *ngIf="userView.images[0]" [src]="userView.images[0]?.image" alt="Imagem de perfil."
+      class="placeholder po-mb-3">
+
+    <h1 class="po-mb-3">{{userView.user.name}}</h1>
+    <h2 class="po-mb-3">{{userView.user.address.street}}</h2>
+    <h2 class="po-mb-3">{{userView.user.address.location.distance.value.toFixed(1)}} {{userView.user.address.location.distance.unit}}</h2>
+    <p class="po-mb-2">Descrição: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur
+      error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam
+      perferendis esse, cupiditate neque quas!</p>
+  </po-widget>
+  <!-- <po-container p-no-shadow="true" p-no-padding="false" p-no-border="true">
+
+  </po-container> -->
 </po-page-default>

@@ -13,8 +13,9 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 
+@CrossOrigin
 @RestController
-@RequestMapping(path = "images")
+@RequestMapping(path = "/images")
 public class ImageController {
 
     private final ImageAppService appService;
@@ -24,7 +25,7 @@ public class ImageController {
     }
 
     @GetMapping
-    public Flux<ImageDTO> findByFilter(@RequestBody @Valid ImageRequestDTO imageRequestDTO) {
+    public Flux<ImageDTO> findByFilter(ImageRequestDTO imageRequestDTO) {
         return appService.findByFilter(imageRequestDTO);
     }
 

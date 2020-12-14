@@ -27,13 +27,7 @@ public class UserController {
     }
 
     @GetMapping
-    public Flux<UserDTO> findTest(UserRequestDTO requestDTO) {
-        log.info("Find Users by Filter. RequestDTO: {}", requestDTO);
-        return appService.findByFilter(requestDTO);
-    }
-
-    @GetMapping(path ="/{id}/teste")
-    public Flux<UserDTO> findByFilter(@RequestBody UserRequestDTO requestDTO) {
+    public Flux<UserDTO> findByFilter(UserRequestDTO requestDTO) {
         log.info("Find Users by Filter. RequestDTO: {}", requestDTO);
         return appService.findByFilter(requestDTO);
     }

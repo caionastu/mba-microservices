@@ -1,11 +1,20 @@
-<po-navbar [p-items]="menuItems" p-shadow="true" p-logo="../assets/logo-placeholder.png">
+<po-navbar [p-items]="menuItems" p-shadow="true" p-logo="./../assets/logoPlaceholder.png">
 </po-navbar>
 
-<div class="page-margin-top">
-    <router-outlet></router-outlet>        
+<div class="page-wrapper">
+    <router-outlet></router-outlet>
 </div>
 
-<po-container class="po-text-center footer">
+
+<!-- <div class="po-wrapper">
+    <router-outlet></router-outlet>
+</div> -->
+
+<!-- <po-page-default>
+    <router-outlet></router-outlet>
+</po-page-default> -->
+
+<!-- <po-container class="po-text-center footer">
     <div class="placeholder">
         LOGO PLACECHOLDER
     </div>
@@ -15,6 +24,4 @@
     <span class="po-icon po-icon-social-instagram"></span>
     <span class="po-icon po-icon-social-whatsapp"></span>
     <span class="po-icon po-icon-social-twitter"></span>
-</po-container>
-
-
+</po-container> -->

@@ -1,22 +1,13 @@
 package com.caionastu.imageservice.application.image.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import javax.validation.constraints.NotBlank;
+import com.caionastu.core.request.AbstractRequestDTO;
+import lombok.*;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
-public class ImageRequestDTO {
+@AllArgsConstructor
+public class ImageRequestDTO extends AbstractRequestDTO {
 
-    private String id;
-
-    @NotBlank(message = "User Id must not be blank.")
     private String userId;
-
     private ImageType imageType;
 }
